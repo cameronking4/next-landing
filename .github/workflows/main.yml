@@ -24,7 +24,7 @@ jobs:
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           openai_tokens: 1500                # Adjust if necessary
           openai_model: gpt-4o              # Default model from action.yml
-          file_chunks: 0                    # Default chunk size for full files
+          file_chunks: 1000                    # Default chunk size for full files
           target_branch: main               # Adjust based on your repo setup
 
       # Step 3: Validate and debug patch (optional)
