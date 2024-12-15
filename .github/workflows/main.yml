@@ -1,0 +1,22 @@
+name: Create PR with ChatGPT
+
+on:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  solve_issue:
+    if: startsWith(github.event.comment.body, '/solve')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
+      - name: Create a PR using ChatGPT
+        uses: n0madic/chatgpt-pull@v1
+        with:
+          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          model: gpt-4
+          issue_number: ${{ github.event.issue.number }}
