@@ -19,7 +19,7 @@ jobs:
 
       # Step 2: Run the AIPR Action
       - name: Run AIPR Action
-        uses: cameronking4/AIPR@v1.2.0
+        uses: cameronking4/AIPR@v1.3.0
         with:
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           openai_tokens: 1500                # Adjust if necessary
