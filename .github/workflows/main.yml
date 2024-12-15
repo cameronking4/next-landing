@@ -14,11 +14,11 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
-      - name: Creates a PR to solve an issue using ChatGPT
+      - name: Run AIPR Action
         uses: cameronking4/AIPR@v1.0.0
         with:
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          issue_number: ${{ github.event.issue.number }}
-          model: gpt-4o
-
+          openai_tokens: 1500                # Adjust if necessary
+          openai_model: gpt-4o              # Default model from action.yml
+          file_chunks: 5                    # Adjust based on your requirements
+          target_branch: main
