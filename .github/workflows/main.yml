@@ -11,14 +11,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Check out the repository where the issue is created
       - name: Check out repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch all history to ensure diffs work correctly
 
+      # Step 2: Run the AIPR Action
       - name: Run AIPR Action
         uses: cameronking4/AIPR@v1.0.0
         with:
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           openai_tokens: 1500                # Adjust if necessary
           openai_model: gpt-4o              # Default model from action.yml
-          file_chunks: 5                    # Adjust based on your requirements
-          target_branch: main
+          file_chunks: 0                    # Default chunk size for full files
+          target_branch: main               # Adjust based on your repo setup
+
+      # Step 3: Validate and debug patch (optional)
+      - name: Display Patch Debug Info
+        if: always()
+        run: |
+          if [ -f changes.patch ]; then
+            echo "Generated patch file contents:"
+            cat changes.patch
+          else
+            echo "No patch file generated."
+          fi
